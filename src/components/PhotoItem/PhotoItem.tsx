@@ -15,7 +15,7 @@ interface PhotoItemProps {
 const PhotoItem = ({ src }: PhotoItemProps) => {
   return (
     <LazyLoad style={{ height: '100%' }}>
-      <PhotoItemStyled className='photo' src={src} loading='lazy' />
+      <PhotoItemStyled className='photo' src={src} />
     </LazyLoad>
   );
 };

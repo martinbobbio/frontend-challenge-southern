@@ -2,6 +2,7 @@
   <br>
   <img src="https://raw.githubusercontent.com/martinbobbio/frontend-challenge-southern/master/src/assets/images/branding/southern.jpg" width="200">
   <br>
+  <br>
   <a href="https://frontend-challenge-southern.vercel.app/">
   Challenge Southern - Frontend
   </a>

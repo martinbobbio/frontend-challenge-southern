@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 import { Grid } from '@mui/material';
 
 export const RoverStyled = styled.div`
-  margin: 32px 0;
+  margin: 32px 0 64px 0;
 `;
 
 export const LayoutTwoColumns = styled(Grid)`

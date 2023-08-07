@@ -1,16 +1,16 @@
+// React
+import { useEffect, useState } from 'react';
 // Components
-import { PhotoItem, Text } from '@/components';
+import { Icon, PhotoItem, ScrollInfinite } from '@/components';
 // Hooks
 import { useMarsPhotos } from '@/hooks';
+// Constants
+import { PhotosMars } from '@/constants';
 // Styled components
-import {
-  PhotoMainColumn,
-  PhotoListStyled,
-  PhotoMainGrid,
-  PhotoSkeleton,
-} from './PhotoList.styled';
+import { PhotoListStyled, IconContainer } from './PhotoList.styled';
 // Libreries
-import { useElementSize } from 'usehooks-ts';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { ImageList, ImageListItem } from '@mui/material';
 
 interface PhotoListProps {
   rover: string;
@@ -22,52 +22,51 @@ interface PhotoListProps {
  * @return React.ReactElement <PhotoList/>
  */
 const PhotoList = ({ rover }: PhotoListProps) => {
-  const { data, isLoading, error } = useMarsPhotos(rover);
-  const [photoElement, { width }] = useElementSize();
+  const [page, setPage] = useState(1);
+  const [photosMars, setPhotoMars] = useState<PhotosMars[]>([]);
+  const { data, isLoading, error } = useMarsPhotos(rover, page);
 
   const shouldRender = {
-    main: !!data?.photos?.length && !isLoading && !error,
-    emptyState: !data?.photos?.length && !isLoading && !error,
-    skeletons: isLoading && !error,
-    error: error,
+    main: !!photosMars?.length && !error,
+    loading: isLoading && !error,
   };
+
+  /**
+   * Function that get handle getter for more photos.
+   *
+   * @return void
+   */
+  const handleNextPage = () => {
+    if (!isLoading && !error) {
+      console.log('A', page + 1);
+      setPage(page + 1);
+    }
+  };
+
+  useEffect(() => {
+    if (data?.photos) {
+      setPhotoMars((prevPhotos) => [...prevPhotos, ...data.photos]);
+    }
+  }, [data]);
 
   return (
     <PhotoListStyled>
-      <PhotoMainGrid container spacing={0}>
-        {shouldRender.main &&
-          data?.photos.map((marsPhoto, i) => (
-            <PhotoMainColumn
-              ref={photoElement}
-              key={i}
-              item
-              xs={12}
-              sm={4}
-              size={width}
-            >
-              <PhotoItem src={marsPhoto.img_src} />
-            </PhotoMainColumn>
-          ))}
-        {shouldRender.skeletons &&
-          Array.from({ length: 9 }, (_, i) => (
-            <PhotoMainColumn
-              ref={photoElement}
-              key={i}
-              item
-              xs={12}
-              sm={4}
-              size={width}
-            >
-              <PhotoSkeleton
-                variant='rectangular'
-                width={width}
-                height={width}
-              />
-            </PhotoMainColumn>
-          ))}
-      </PhotoMainGrid>
-      {shouldRender.emptyState && <Text>empty state</Text>}
-      {shouldRender.error && <Text>error</Text>}
+      {shouldRender.main && (
+        <ScrollInfinite handler={handleNextPage}>
+          <ImageList variant='quilted' cols={3} gap={4} className='image-list'>
+            {photosMars?.map((marsPhoto, i) => (
+              <ImageListItem key={i}>
+                <PhotoItem src={marsPhoto.img_src} />
+              </ImageListItem>
+            ))}
+          </ImageList>
+        </ScrollInfinite>
+      )}
+      {shouldRender.loading && (
+        <IconContainer>
+          <Icon size='xxl' animation='spin' icon={faCircleNotch} />
+        </IconContainer>
+      )}
     </PhotoListStyled>
   );
 };
