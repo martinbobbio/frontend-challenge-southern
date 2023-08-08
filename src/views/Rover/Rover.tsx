@@ -1,7 +1,8 @@
 // React
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // Components
-import { Breadcrumbs, Icon, PhotoList, Text } from '@/components';
+import { Breadcrumbs, Filters, Icon, PhotoList, Text } from '@/components';
 // Constants
 import { SupportedPages } from '@/constants';
 // Utils
@@ -24,6 +25,7 @@ import { Button } from '@mui/material';
  */
 const Rover = () => {
   const location = useLocation();
+  const [showFilters, setShowFilters] = useState(false);
   const rover = location.pathname.replace('/', '');
   const breadcrumbs = {
     separator: <Icon size='sm' icon={faChevronRight} />,
@@ -34,6 +36,7 @@ const Rover = () => {
       <Text key={1}>{firstLetterUppercase(rover)}</Text>,
     ],
   };
+
   return (
     <RoverStyled>
       <LayoutTwoColumns container spacing={2}>
@@ -44,6 +47,7 @@ const Rover = () => {
           <Button
             size='small'
             variant='contained'
+            onClick={() => setShowFilters(true)}
             endIcon={<Icon icon={faFilter} size='sm' />}
           >
             <Text>Filter</Text>
@@ -51,6 +55,7 @@ const Rover = () => {
         </RightColumn>
       </LayoutTwoColumns>
       <PhotoList rover={rover} />
+      <Filters open={showFilters} onClose={() => setShowFilters(false)} />
     </RoverStyled>
   );
 };

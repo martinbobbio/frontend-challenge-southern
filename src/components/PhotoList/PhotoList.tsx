@@ -36,7 +36,7 @@ const PhotoList = ({ rover }: PhotoListProps) => {
    *
    * @return void
    */
-  const handleNextPage = () => {
+  const _handleNextPage = () => {
     if (!isLoading && !error) {
       console.log('A', page + 1);
       setPage(page + 1);
@@ -52,7 +52,7 @@ const PhotoList = ({ rover }: PhotoListProps) => {
   return (
     <PhotoListStyled>
       {shouldRender.main && (
-        <ScrollInfinite handler={handleNextPage}>
+        <ScrollInfinite handler={_handleNextPage}>
           <ImageList variant='quilted' cols={3} gap={4} className='image-list'>
             {photosMars?.map((marsPhoto, i) => (
               <ImageListItem key={i}>
