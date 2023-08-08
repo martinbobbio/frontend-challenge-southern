@@ -21,14 +21,16 @@ const useMarsPhotos = <Data = ResponseMarsPhotos>(
       params: {
         api_key: process.env.REACT_APP_API_KEY,
         sol: filters?.sol,
-        camera: filters?.camera,
+        camera: filters?.camera?.toLowerCase(),
         //earth_date: '2023-08-01',
         page,
       },
     });
     return response.data;
   };
-  return useSWR(`${uri}/${page}`, fetcher, { revalidateOnFocus: false });
+  return useSWR(`${uri}/${page}/${filters?.camera}/${filters?.sol}`, fetcher, {
+    revalidateOnFocus: false,
+  });
 };
 
 export default useMarsPhotos;

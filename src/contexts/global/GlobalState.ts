@@ -19,6 +19,6 @@ export type Action = {
 
 export const initialGlobalState: GlobalState = {
   filters: {
-    sol: 2000,
+    sol: 1000,
   },
 };

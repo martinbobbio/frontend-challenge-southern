@@ -2,7 +2,7 @@
 import { styled } from 'styled-components';
 import { Drawer, FormControl, Grid, TextField } from '@mui/material';
 
-export const FiltersStyled = styled(Drawer)``;
+export const FilterDrawerStyled = styled(Drawer)``;
 
 export const InputsContainer = styled(Grid)`
   padding-top: 32px;

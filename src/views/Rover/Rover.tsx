@@ -1,14 +1,24 @@
 // React
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 // Components
-import { Breadcrumbs, Filters, Icon, PhotoList, Text } from '@/components';
+import {
+  Breadcrumbs,
+  FilterChips,
+  FiltersDrawer,
+  Icon,
+  PhotoList,
+  Text,
+} from '@/components';
 // Constants
-import { SupportedPages, SupportedRovers } from '@/constants';
+import { PhotosMars, SupportedPages, SupportedRovers } from '@/constants';
+// Hooks
+import { useMarsPhotos } from '@/hooks';
 // Utils
 import { firstLetterUppercase } from '@/utils';
 // Styled components
 import {
+  FilterChipsContainer,
   LayoutTwoColumns,
   LeftColumn,
   RightColumn,
@@ -17,16 +27,24 @@ import {
 // Libreries
 import { faChevronRight, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@mui/material';
+import { FiltersState } from '@/contexts';
+
+interface RoverProps {
+  rover: SupportedRovers;
+}
 
 /**
  * Functional component that render component rover.
  *
  * @return React.ReactElement <Rover/>
  */
-const Rover = () => {
-  const location = useLocation();
+const Rover = ({ rover }: RoverProps) => {
+  const [page, setPage] = useState(1);
+  const [photosMars, setPhotoMars] = useState<PhotosMars[]>([]);
   const [showFilters, setShowFilters] = useState(false);
-  const rover = location.pathname.replace('/', '') as SupportedRovers;
+  const [filters, setFilters] = useState<FiltersState>({ sol: 1000 });
+  const { data, isLoading } = useMarsPhotos(rover, page, filters);
+
   const breadcrumbs = {
     separator: <Icon size='sm' icon={faChevronRight} />,
     elements: [
@@ -36,6 +54,39 @@ const Rover = () => {
       <Text key={1}>{firstLetterUppercase(rover)}</Text>,
     ],
   };
+
+  /**
+   * Function that get handle getter for more photos.
+   *
+   * @return void
+   */
+  const _onNextPage = () => {
+    if (!isLoading) {
+      setPage(page + 1);
+    }
+  };
+
+  /**
+   * Function that get handle getter for more photos.
+   *
+   * @return void
+   */
+  const _onSubmitFilters = (filters: FiltersState) => {
+    setPhotoMars([]);
+    setPage(1);
+    setFilters(filters);
+  };
+
+  useEffect(() => {
+    setPhotoMars([]);
+    setPage(1);
+  }, []);
+
+  useEffect(() => {
+    if (data?.photos) {
+      setPhotoMars((prevPhotos) => [...prevPhotos, ...data.photos]);
+    }
+  }, [data]);
 
   return (
     <RoverStyled>
@@ -54,10 +105,19 @@ const Rover = () => {
           </Button>
         </RightColumn>
       </LayoutTwoColumns>
-      <PhotoList rover={rover} />
-      <Filters
+      <FilterChipsContainer>
+        <FilterChips filters={filters} onChangeFilters={_onSubmitFilters} />
+      </FilterChipsContainer>
+      <PhotoList
+        photosMars={photosMars}
+        isLoading={isLoading}
+        onNextPage={_onNextPage}
+      />
+      <FiltersDrawer
         rover={rover}
         open={showFilters}
+        filters={filters}
+        onSubmit={_onSubmitFilters}
         onClose={() => setShowFilters(false)}
       />
     </RoverStyled>

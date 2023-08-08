@@ -7,4 +7,5 @@ export { default as Breadcrumbs } from './Breadcrumbs/Breadcrumbs';
 export { default as ScrollInfinite } from './ScrollInfinite/ScrollInfinite';
 export { default as PhotoList } from './PhotoList/PhotoList';
 export { default as PhotoItem } from './PhotoItem/PhotoItem';
-export { default as Filters } from './Filters/Filters';
+export { default as FiltersDrawer } from './FiltersDrawer/FiltersDrawer';
+export { default as FilterChips } from './FilterChips/FilterChips';

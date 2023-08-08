@@ -6,15 +6,13 @@ import { Text } from '@/components';
 import {
   ButtonContainer,
   FiltersContainer,
-  FiltersStyled,
+  FilterDrawerStyled,
   FormControlStyled,
   InputsContainer,
   TextFieldStyled,
-} from './Filters.styled';
+} from './FiltersDrawer.styled';
 // Constants
 import { CONFIG, SupportedRovers } from '@/constants';
-// Hooks
-import { useGlobalContext } from '@/hooks';
 // Libreries
 import {
   Button,
@@ -24,31 +22,46 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
 } from '@mui/material';
 import { FiltersState } from '@/contexts';
 
-interface FilterProps {
+interface FilterDrawerProps {
   open: boolean;
   rover: SupportedRovers;
+  filters: FiltersState;
   onClose: () => void;
+  onSubmit: (filters: FiltersState) => void;
 }
 
 /**
- * Functional component that render component filters.
+ * Functional component that render component filter drawer.
  *
- * @return React.ReactElement <Filters/>
+ * @return React.ReactElement <FilterDrawer/>
  */
-const Filters = ({ open, rover, onClose }: FilterProps) => {
-  const { setFilters } = useGlobalContext();
+const FilterDrawer = ({
+  filters,
+  open,
+  rover,
+  onClose,
+  onSubmit,
+}: FilterDrawerProps) => {
   const [camera, setCamera] = useState('');
+  const [sol, setSol] = useState(filters?.sol as number);
 
   /**
    * Handle on change for camera rover
    *
    */
-  const handleChange = (event: SelectChangeEvent) => {
-    setCamera(event.target.value as string);
+  const handleChangeCamera = (value: string) => {
+    setCamera(value);
+  };
+
+  /**
+   * Handle on change for camera rover
+   *
+   */
+  const handleChangeSol = (value: string) => {
+    setSol(Number(value));
   };
 
   /**
@@ -58,8 +71,9 @@ const Filters = ({ open, rover, onClose }: FilterProps) => {
   const handleSubmit = () => {
     const filters: FiltersState = {};
     if (camera) filters.camera = camera;
-    setFilters(filters);
+    if (sol) filters.sol = sol;
     onClose();
+    onSubmit(filters);
   };
 
   /**
@@ -74,7 +88,7 @@ const Filters = ({ open, rover, onClose }: FilterProps) => {
         id='demo-simple-select'
         value={camera}
         label='Camera'
-        onChange={handleChange}
+        onChange={(e) => handleChangeCamera(e.target.value)}
       >
         {CONFIG.forms.cameras[rover].map((value, i) => (
           <MenuItem key={i} value={value}>
@@ -94,6 +108,8 @@ const Filters = ({ open, rover, onClose }: FilterProps) => {
       label='Sol Date'
       id='outlined-start-adornment'
       type='number'
+      onChange={(e) => handleChangeSol(e.target.value)}
+      value={sol}
       sx={{ m: 1, width: '25ch' }}
       InputProps={{
         startAdornment: <InputAdornment position='start'>Sol</InputAdornment>,
@@ -102,7 +118,7 @@ const Filters = ({ open, rover, onClose }: FilterProps) => {
   );
 
   return (
-    <FiltersStyled open={open} anchor='bottom' onClose={onClose}>
+    <FilterDrawerStyled open={open} anchor='bottom' onClose={onClose}>
       <FiltersContainer>
         <Container>
           <Text size='xl'>Filters</Text>
@@ -125,8 +141,8 @@ const Filters = ({ open, rover, onClose }: FilterProps) => {
           </ButtonContainer>
         </Container>
       </FiltersContainer>
-    </FiltersStyled>
+    </FilterDrawerStyled>
   );
 };
 
-export default Filters;
+export default FilterDrawer;

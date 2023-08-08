@@ -1,11 +1,7 @@
-// React
-import { useEffect, useState } from 'react';
 // Components
 import { Icon, PhotoItem, ScrollInfinite } from '@/components';
-// Hooks
-import { useGlobalContext, useMarsPhotos } from '@/hooks';
 // Constants
-import { PhotosMars, SupportedRovers } from '@/constants';
+import { PhotosMars } from '@/constants';
 // Styled components
 import { PhotoListStyled, IconContainer } from './PhotoList.styled';
 // Libreries
@@ -13,7 +9,9 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { ImageList, ImageListItem } from '@mui/material';
 
 interface PhotoListProps {
-  rover: SupportedRovers;
+  photosMars?: PhotosMars[];
+  isLoading: boolean;
+  onNextPage: () => void;
 }
 
 /**
@@ -21,38 +19,16 @@ interface PhotoListProps {
  *
  * @return React.ReactElement <PhotoList/>
  */
-const PhotoList = ({ rover }: PhotoListProps) => {
-  const [page, setPage] = useState(1);
-  const [photosMars, setPhotoMars] = useState<PhotosMars[]>([]);
-  const { filters } = useGlobalContext();
-  const { data, isLoading, error } = useMarsPhotos(rover, page, filters);
-
+const PhotoList = ({ photosMars, isLoading, onNextPage }: PhotoListProps) => {
   const shouldRender = {
-    main: !!photosMars?.length && !error,
-    loading: isLoading && !error,
+    main: !!photosMars?.length,
+    loading: isLoading,
   };
-
-  /**
-   * Function that get handle getter for more photos.
-   *
-   * @return void
-   */
-  const _handleNextPage = () => {
-    if (!isLoading && !error) {
-      setPage(page + 1);
-    }
-  };
-
-  useEffect(() => {
-    if (data?.photos) {
-      setPhotoMars((prevPhotos) => [...prevPhotos, ...data.photos]);
-    }
-  }, [data]);
 
   return (
     <PhotoListStyled>
-      {shouldRender.main && (
-        <ScrollInfinite handler={_handleNextPage}>
+      {shouldRender.main && photosMars && (
+        <ScrollInfinite onNextPage={onNextPage}>
           <ImageList variant='quilted' cols={3} gap={4} className='image-list'>
             {photosMars?.map((marsPhoto, i) => (
               <ImageListItem key={i}>

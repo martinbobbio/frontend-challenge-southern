@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home, Rover, NotFound } from '@/views';
 import App from '@/App';
 // Constants
-import { SupportedPages } from '@/constants';
+import { SupportedPages, SupportedRovers } from '@/constants';
 
 /**
  * Functional component that render the router and wrap the application.
@@ -26,15 +26,17 @@ const Router = () => {
         <Route path={SupportedPages.Home} element={wrapApplication(<Home />)} />
         <Route
           path={SupportedPages.Curiosity}
-          element={wrapApplication(<Rover />)}
+          element={wrapApplication(<Rover rover={SupportedRovers.Curiosity} />)}
         />
         <Route
           path={SupportedPages.Opportunity}
-          element={wrapApplication(<Rover />)}
+          element={wrapApplication(
+            <Rover rover={SupportedRovers.Opportunity} />
+          )}
         />
         <Route
           path={SupportedPages.Spirit}
-          element={wrapApplication(<Rover />)}
+          element={wrapApplication(<Rover rover={SupportedRovers.Spirit} />)}
         />
         <Route
           path={SupportedPages.NotFound}

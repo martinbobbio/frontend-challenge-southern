@@ -86,9 +86,17 @@ const OPTIONS_FILTER_CAMERAS = {
   spirit: ['FHAZ', 'RHAZ', 'PANCAM', 'MINITES', 'NAVCAM'],
 };
 
+const SITES = {
+  react: 'https://legacy.reactjs.org/',
+  vite: 'https://vitejs.dev/',
+  githubVersion:
+    'https://github.com/martinbobbio/frontend-challenge-southern/tree/',
+};
+
 export default {
   branding: BRANDING,
   cards: CARDS,
+  sites: SITES,
   forms: {
     cameras: OPTIONS_FILTER_CAMERAS,
   },

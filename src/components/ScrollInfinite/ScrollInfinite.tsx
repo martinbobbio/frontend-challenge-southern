@@ -5,7 +5,7 @@ import { ScrollInfiniteStyled } from './ScrollInfinite.styled';
 
 interface ScrollInfiniteProps {
   children: React.ReactNode;
-  handler: () => void;
+  onNextPage: () => void;
 }
 
 /**
@@ -13,14 +13,14 @@ interface ScrollInfiniteProps {
  *
  * @return React.ReactElement <ScrollInfinite/>
  */
-const ScrollInfinite = ({ children, handler }: ScrollInfiniteProps) => {
+const ScrollInfinite = ({ children, onNextPage }: ScrollInfiniteProps) => {
   const handleInfiniteScroll = () => {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     const scrolled = window.scrollY;
 
     if (scrolled + windowHeight >= documentHeight - 64) {
-      handler();
+      onNextPage();
     }
   };
 
