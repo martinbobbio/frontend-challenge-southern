@@ -80,9 +80,18 @@ const BASIC_PROPS = {
   boxShadow: BOX_SHADOWS,
 };
 
+const OPTIONS_FILTER_CAMERAS = {
+  curiosity: ['FHAZ', 'RHAZ', 'MAST', 'CHEMCAM', 'MAHLI', 'MARDI', 'NAVCAM'],
+  opportunity: ['FHAZ', 'RHAZ', 'PANCAM', 'MINITES', 'NAVCAM'],
+  spirit: ['FHAZ', 'RHAZ', 'PANCAM', 'MINITES', 'NAVCAM'],
+};
+
 export default {
   branding: BRANDING,
   cards: CARDS,
+  forms: {
+    cameras: OPTIONS_FILTER_CAMERAS,
+  },
   theme: {
     fontSize: FONT_SIZES,
     lineHeight: LINE_HEIGHTS,

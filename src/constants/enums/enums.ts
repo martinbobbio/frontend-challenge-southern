@@ -19,6 +19,12 @@ export enum SupportedSizes {
   XXL = 'xxl',
 }
 
+export enum SupportedRovers {
+  Curiosity = 'curiosity',
+  Opportunity = 'opportunity',
+  Spirit = 'spirit',
+}
+
 export enum SupportedWeights {
   Low = 'low',
   Medium = 'medium',

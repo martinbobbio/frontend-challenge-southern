@@ -4,6 +4,7 @@ export {
   SupportedSizes,
   SupportedWeights,
   SupportedIconsAnimations,
+  SupportedRovers,
 } from './enums/enums';
 export { default as CONFIG } from './config/config';
 export { default as THEME } from './theme/theme';

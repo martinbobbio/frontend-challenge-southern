@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 // Components
 import { Icon, PhotoItem, ScrollInfinite } from '@/components';
 // Hooks
-import { useMarsPhotos } from '@/hooks';
+import { useGlobalContext, useMarsPhotos } from '@/hooks';
 // Constants
-import { PhotosMars } from '@/constants';
+import { PhotosMars, SupportedRovers } from '@/constants';
 // Styled components
 import { PhotoListStyled, IconContainer } from './PhotoList.styled';
 // Libreries
@@ -13,7 +13,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { ImageList, ImageListItem } from '@mui/material';
 
 interface PhotoListProps {
-  rover: string;
+  rover: SupportedRovers;
 }
 
 /**
@@ -24,7 +24,8 @@ interface PhotoListProps {
 const PhotoList = ({ rover }: PhotoListProps) => {
   const [page, setPage] = useState(1);
   const [photosMars, setPhotoMars] = useState<PhotosMars[]>([]);
-  const { data, isLoading, error } = useMarsPhotos(rover, page);
+  const { filters } = useGlobalContext();
+  const { data, isLoading, error } = useMarsPhotos(rover, page, filters);
 
   const shouldRender = {
     main: !!photosMars?.length && !error,
@@ -38,7 +39,6 @@ const PhotoList = ({ rover }: PhotoListProps) => {
    */
   const _handleNextPage = () => {
     if (!isLoading && !error) {
-      console.log('A', page + 1);
       setPage(page + 1);
     }
   };

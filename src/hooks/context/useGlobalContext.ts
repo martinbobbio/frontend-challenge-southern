@@ -1,7 +1,7 @@
 // React
 import { useContext } from 'react';
 // Hooks
-import { GlobalContext } from '@/contexts';
+import { FiltersState, GlobalContext } from '@/contexts';
 
 /**
  * Hook that facility global contexts calls.
@@ -11,13 +11,13 @@ import { GlobalContext } from '@/contexts';
 const useGlobalContext = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
-  const { loading } = state;
+  const { filters } = state;
 
-  const setLoading = (payload: boolean) => {
-    dispatch({ type: 'SET_LOADING', payload });
+  const setFilters = (payload: FiltersState) => {
+    dispatch({ type: 'SET_FILTER', payload });
   };
 
-  return { loading, setLoading };
+  return { filters, setFilters };
 };
 
 export default useGlobalContext;

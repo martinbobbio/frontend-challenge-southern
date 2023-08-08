@@ -1,9 +1,24 @@
 export interface GlobalState {
-  loading: boolean;
+  filters?: {
+    camera?: string;
+    sol?: number;
+    date?: string;
+  };
 }
 
-export type Action = { type: 'SET_LOADING'; payload: boolean };
+export interface FiltersState {
+  camera?: string;
+  sol?: number;
+  date?: string;
+}
+
+export type Action = {
+  type: 'SET_FILTER';
+  payload: FiltersState;
+};
 
 export const initialGlobalState: GlobalState = {
-  loading: false,
+  filters: {
+    sol: 2000,
+  },
 };

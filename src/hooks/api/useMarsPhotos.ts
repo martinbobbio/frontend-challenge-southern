@@ -1,5 +1,6 @@
 // Constants
 import { API, ResponseMarsPhotos } from '@/constants';
+import { FiltersState } from '@/contexts';
 // Libreries
 import useSWR from 'swr';
 
@@ -11,14 +12,16 @@ type FetcherFn<Data> = () => Promise<Data>;
  */
 const useMarsPhotos = <Data = ResponseMarsPhotos>(
   rover: string,
-  page: number
+  page: number,
+  filters?: FiltersState
 ) => {
   const uri = `rovers/${rover}/photos`;
   const fetcher: FetcherFn<Data> = async () => {
     const response = await API.get(uri, {
       params: {
         api_key: process.env.REACT_APP_API_KEY,
-        sol: 1,
+        sol: filters?.sol,
+        camera: filters?.camera,
         //earth_date: '2023-08-01',
         page,
       },

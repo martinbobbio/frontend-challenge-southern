@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 // Components
 import { Breadcrumbs, Filters, Icon, PhotoList, Text } from '@/components';
 // Constants
-import { SupportedPages } from '@/constants';
+import { SupportedPages, SupportedRovers } from '@/constants';
 // Utils
 import { firstLetterUppercase } from '@/utils';
 // Styled components
@@ -26,7 +26,7 @@ import { Button } from '@mui/material';
 const Rover = () => {
   const location = useLocation();
   const [showFilters, setShowFilters] = useState(false);
-  const rover = location.pathname.replace('/', '');
+  const rover = location.pathname.replace('/', '') as SupportedRovers;
   const breadcrumbs = {
     separator: <Icon size='sm' icon={faChevronRight} />,
     elements: [
@@ -55,7 +55,11 @@ const Rover = () => {
         </RightColumn>
       </LayoutTwoColumns>
       <PhotoList rover={rover} />
-      <Filters open={showFilters} onClose={() => setShowFilters(false)} />
+      <Filters
+        rover={rover}
+        open={showFilters}
+        onClose={() => setShowFilters(false)}
+      />
     </RoverStyled>
   );
 };
