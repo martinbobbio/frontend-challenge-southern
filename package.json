@@ -1,7 +1,7 @@
 {
   "name": "frontend-challenge-southern",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.8.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,8 +15,10 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/material": "^5.13.4",
+    "@mui/material": "^5.14.4",
+    "@mui/x-date-pickers": "^6.11.0",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",

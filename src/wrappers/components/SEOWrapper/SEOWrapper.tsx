@@ -16,7 +16,7 @@ const SEOWrapper = ({ children }: SEOWrapperProps) => {
     <>
       <Helmet>
         <title>Southern: Challenge NASA</title>
-        <meta name='description' content='Descripción de la página' />
+        <meta name='description' content='This page is for a challenge' />
       </Helmet>
       {children}
     </>

@@ -10,9 +10,10 @@ import {
   FormControlStyled,
   InputsContainer,
   TextFieldStyled,
+  DateFieldStyled,
 } from './FiltersDrawer.styled';
 // Constants
-import { CONFIG, SupportedRovers } from '@/constants';
+import { CONFIG, FiltersPhotos, SupportedRovers } from '@/constants';
 // Libreries
 import {
   Button,
@@ -23,14 +24,16 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
-import { FiltersState } from '@/contexts';
+import { Dayjs } from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 interface FilterDrawerProps {
   open: boolean;
   rover: SupportedRovers;
-  filters: FiltersState;
+  filters: FiltersPhotos;
   onClose: () => void;
-  onSubmit: (filters: FiltersState) => void;
+  onSubmit: (filters: FiltersPhotos) => void;
 }
 
 /**
@@ -47,6 +50,7 @@ const FilterDrawer = ({
 }: FilterDrawerProps) => {
   const [camera, setCamera] = useState('');
   const [sol, setSol] = useState(filters?.sol as number);
+  const [earthDate, setEarthDate] = useState<Dayjs | null>(null);
 
   /**
    * Handle on change for camera rover
@@ -68,10 +72,20 @@ const FilterDrawer = ({
    * Handle on change for camera rover
    *
    */
+  const handleEarthDate = (value: Dayjs) => {
+    const isValid = value?.isValid() && value?.isAfter('2003-01-01');
+    if (isValid) setEarthDate(value);
+  };
+
+  /**
+   * Handle on change for camera rover
+   *
+   */
   const handleSubmit = () => {
-    const filters: FiltersState = {};
+    const filters: FiltersPhotos = {};
     if (camera) filters.camera = camera;
     if (sol) filters.sol = sol;
+    if (earthDate) filters.date = earthDate;
     onClose();
     onSubmit(filters);
   };
@@ -109,12 +123,27 @@ const FilterDrawer = ({
       id='outlined-start-adornment'
       type='number'
       onChange={(e) => handleChangeSol(e.target.value)}
-      value={sol}
+      defaultValue={sol}
       sx={{ m: 1, width: '25ch' }}
       InputProps={{
         startAdornment: <InputAdornment position='start'>Sol</InputAdornment>,
       }}
     />
+  );
+
+  /**
+   * Render input for eath date
+   *
+   */
+  const _renderInputEarthDate = () => (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DateFieldStyled
+        label='Earth Date'
+        value={earthDate}
+        onChange={(date) => handleEarthDate(date as Dayjs)}
+        format='DD/MM/YYYY'
+      />
+    </LocalizationProvider>
   );
 
   return (
@@ -129,7 +158,9 @@ const FilterDrawer = ({
             <Grid item xs={12} sm={4}>
               {_renderInputSol()}
             </Grid>
-            <Grid item xs={12} sm={4}></Grid>
+            <Grid item xs={12} sm={4}>
+              {_renderInputEarthDate()}
+            </Grid>
           </InputsContainer>
           <ButtonContainer>
             <Button size='large' className='cancel' onClick={onClose}>

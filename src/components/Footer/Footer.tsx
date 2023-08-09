@@ -1,7 +1,9 @@
 // Components
+import { Text } from '@/components';
+// Assets
 import { logoMBDark, logoMBLight } from '@/assets';
-import { Text } from '..';
 // Constants
+import { CONFIG } from '@/constants';
 import { version } from '../../../package.json';
 // Styled components
 import {
@@ -12,7 +14,8 @@ import {
 } from './Footer.styled';
 // Libreries
 import { Grid } from '@mui/material';
-import { CONFIG } from '@/constants';
+
+import { useDarkMode } from 'usehooks-ts';
 
 /**
  * Functional component that render component footer.
@@ -20,27 +23,42 @@ import { CONFIG } from '@/constants';
  * @return React.ReactElement <Footer/>
  */
 const Footer = () => {
+  const { isDarkMode } = useDarkMode();
+  const logo = isDarkMode ? logoMBDark : logoMBLight;
+
   return (
     <FooterStyled>
       <Grid container justifyContent='center' spacing={2}>
         <Grid item xs={12} sm={2}>
-          <FooterLogo src={logoMBDark} />
+          <FooterLogo src={logo} />
         </Grid>
         <Grid item xs={12} sm={4}>
           <ContentText>
             <Text fontWeight='medium'>
               Southern Challenge{' '}
-              <ExternalLink href={`${CONFIG.sites.githubVersion}/${version}`}>
+              <ExternalLink
+                target='_blank'
+                href={`${CONFIG.sites.githubVersion}${version}`}
+                color='inherit'
+              >
                 v{version}
               </ExternalLink>
             </Text>
             <Text fontWeight='medium'>
               Powered by{' '}
-              <ExternalLink href={CONFIG.sites.react} color='inherit'>
+              <ExternalLink
+                target='_blank'
+                href={CONFIG.sites.react}
+                color='inherit'
+              >
                 React
               </ExternalLink>{' '}
               and{' '}
-              <ExternalLink href={CONFIG.sites.vite} color='inherit'>
+              <ExternalLink
+                target='_blank'
+                href={CONFIG.sites.vite}
+                color='inherit'
+              >
                 ViteJS
               </ExternalLink>
             </Text>

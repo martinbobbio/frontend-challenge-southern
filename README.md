@@ -36,7 +36,7 @@ REACT_APP_API_URL=<api-url>
 REACT_APP_API_KEY=<api-key>
 ```
 
-Replace <api-url> with the URL of NASA API and <api-key> for API_KEY getted in NASA API.
+Replace <api-url> with the URL of NASA API (https://api.nasa.gov/mars-photos/api/v1) and <api-key> for API_KEY getted in NASA API.
 
 4. Start the development server:
 

@@ -1,6 +1,5 @@
 // Constants
-import { API, ResponseMarsPhotos } from '@/constants';
-import { FiltersState } from '@/contexts';
+import { API, FiltersPhotos, ResponseMarsPhotos } from '@/constants';
 // Libreries
 import useSWR from 'swr';
 
@@ -13,7 +12,7 @@ type FetcherFn<Data> = () => Promise<Data>;
 const useMarsPhotos = <Data = ResponseMarsPhotos>(
   rover: string,
   page: number,
-  filters?: FiltersState
+  filters?: FiltersPhotos
 ) => {
   const uri = `rovers/${rover}/photos`;
   const fetcher: FetcherFn<Data> = async () => {
@@ -22,15 +21,19 @@ const useMarsPhotos = <Data = ResponseMarsPhotos>(
         api_key: process.env.REACT_APP_API_KEY,
         sol: filters?.sol,
         camera: filters?.camera?.toLowerCase(),
-        //earth_date: '2023-08-01',
+        earth_date: filters?.date?.format('YYYY-MM-DD'),
         page,
       },
     });
     return response.data;
   };
-  return useSWR(`${uri}/${page}/${filters?.camera}/${filters?.sol}`, fetcher, {
-    revalidateOnFocus: false,
-  });
+  return useSWR(
+    `${uri}/${page}/${filters?.camera}/${filters?.sol}/${filters?.date}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
 };
 
 export default useMarsPhotos;

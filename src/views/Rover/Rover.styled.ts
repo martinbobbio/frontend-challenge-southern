@@ -9,7 +9,7 @@ export const RoverStyled = styled.div`
 
 export const FilterChipsContainer = styled.div`
   text-align: left;
-  margin: 32px 0;
+  margin: 16px 0;
 `;
 
 export const LayoutTwoColumns = styled(Grid)`

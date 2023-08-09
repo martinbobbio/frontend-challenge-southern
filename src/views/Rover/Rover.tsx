@@ -11,7 +11,13 @@ import {
   Text,
 } from '@/components';
 // Constants
-import { PhotosMars, SupportedPages, SupportedRovers } from '@/constants';
+import {
+  CONFIG,
+  FiltersPhotos,
+  PhotosMars,
+  SupportedPages,
+  SupportedRovers,
+} from '@/constants';
 // Hooks
 import { useMarsPhotos } from '@/hooks';
 // Utils
@@ -27,7 +33,6 @@ import {
 // Libreries
 import { faChevronRight, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { Button } from '@mui/material';
-import { FiltersState } from '@/contexts';
 
 interface RoverProps {
   rover: SupportedRovers;
@@ -42,7 +47,9 @@ const Rover = ({ rover }: RoverProps) => {
   const [page, setPage] = useState(1);
   const [photosMars, setPhotoMars] = useState<PhotosMars[]>([]);
   const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState<FiltersState>({ sol: 1000 });
+  const [filters, setFilters] = useState<FiltersPhotos>(
+    CONFIG.forms.defaultFilters
+  );
   const { data, isLoading } = useMarsPhotos(rover, page, filters);
 
   const breadcrumbs = {
@@ -61,17 +68,16 @@ const Rover = ({ rover }: RoverProps) => {
    * @return void
    */
   const _onNextPage = () => {
-    if (!isLoading) {
-      setPage(page + 1);
-    }
+    setPage(page + 1);
   };
 
   /**
    * Function that get handle getter for more photos.
    *
+   * @param filters for update filters
    * @return void
    */
-  const _onSubmitFilters = (filters: FiltersState) => {
+  const _onSubmitFilters = (filters: FiltersPhotos) => {
     setPhotoMars([]);
     setPage(1);
     setFilters(filters);

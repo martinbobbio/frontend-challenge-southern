@@ -9,6 +9,8 @@ import {
 } from '@/assets';
 // Constants
 import { SupportedPages } from '@/constants';
+// Libreries
+import dayjs from 'dayjs';
 
 const BRANDING = {
   header: {
@@ -99,6 +101,9 @@ export default {
   sites: SITES,
   forms: {
     cameras: OPTIONS_FILTER_CAMERAS,
+    defaultFilters: {
+      date: dayjs('2023-08-01'),
+    },
   },
   theme: {
     fontSize: FONT_SIZES,

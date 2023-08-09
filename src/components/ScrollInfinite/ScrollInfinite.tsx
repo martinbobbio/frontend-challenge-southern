@@ -14,6 +14,11 @@ interface ScrollInfiniteProps {
  * @return React.ReactElement <ScrollInfinite/>
  */
 const ScrollInfinite = ({ children, onNextPage }: ScrollInfiniteProps) => {
+  /**
+   * Function that watch when is neccessary to call next page.
+   *
+   * @return void
+   */
   const handleInfiniteScroll = () => {
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;

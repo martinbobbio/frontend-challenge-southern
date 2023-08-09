@@ -2,7 +2,7 @@
 import { styled } from 'styled-components';
 
 export const PhotoListStyled = styled.div`
-  margin: 32px 0 64px;
+  margin: 16px 0 64px;
   .image-list {
     overflow-y: hidden;
   }

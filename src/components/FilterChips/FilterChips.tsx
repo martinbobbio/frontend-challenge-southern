@@ -1,11 +1,12 @@
-// Context
-import { FiltersState } from '@/contexts';
+// Constants
+import { FiltersPhotos } from '@/constants';
 // Styled components
-import { ChipStyled, FilterChipsStyled } from './FilterChips.styled';
+import { ChipContainer, FilterChipsStyled } from './FilterChips.styled';
+import { Chip } from '@mui/material';
 
 interface FilterChipsProps {
-  filters: FiltersState;
-  onChangeFilters: (filters: FiltersState) => void;
+  filters: FiltersPhotos;
+  onChangeFilters: (filters: FiltersPhotos) => void;
 }
 
 /**
@@ -14,17 +15,36 @@ interface FilterChipsProps {
  * @return React.ReactElement <FilterChips/>
  */
 const FilterChips = ({ filters, onChangeFilters }: FilterChipsProps) => {
-  const sol = filters?.sol;
-  const camera = filters?.camera;
+  const { sol, camera, date } = filters;
   return (
     <FilterChipsStyled>
-      <ChipStyled color='primary' label={`SOL: ${sol}`} />
+      {sol && (
+        <ChipContainer>
+          <Chip
+            color='primary'
+            label={`SOL: ${sol}`}
+            clickable={false}
+            onDelete={() => onChangeFilters({ ...filters, sol: undefined })}
+          />
+        </ChipContainer>
+      )}
+      {date && (
+        <ChipContainer>
+          <Chip
+            color='primary'
+            onDelete={() => onChangeFilters({ ...filters, date: undefined })}
+            label={`Earth Date: ${date.format('DD/MM/YYYY')}`}
+          />
+        </ChipContainer>
+      )}
       {camera && (
-        <ChipStyled
-          color='primary'
-          label={`CAMERA: ${camera}`}
-          onDelete={() => onChangeFilters({ ...filters, camera: undefined })}
-        />
+        <ChipContainer>
+          <Chip
+            color='primary'
+            label={`CAMERA: ${camera}`}
+            onDelete={() => onChangeFilters({ ...filters, camera: undefined })}
+          />
+        </ChipContainer>
       )}
     </FilterChipsStyled>
   );

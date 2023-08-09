@@ -1,8 +1,26 @@
 // Libreries
 import { styled } from 'styled-components';
 import { Drawer, FormControl, Grid, TextField } from '@mui/material';
+import { DateField } from '@mui/x-date-pickers/DateField';
 
-export const FilterDrawerStyled = styled(Drawer)``;
+/* TO-DO: Remove important and find the better way to apply this style */
+export const FilterDrawerStyled = styled(Drawer)`
+  input,
+  svg,
+  label,
+  .MuiSelect-select,
+  .MuiInputLabel-formControl,
+  .css-2962tf-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
+  .css-1yyyg0v-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
+  .css-2962tf-MuiFormLabel-root-MuiInputLabel-root.Mui-error,
+  .css-1pnmrwp-MuiTypography-root,
+  .css-2962tf-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+    color: ${({ theme }) => theme.palette.default.main};
+  }
+  fieldset {
+    border-color: ${({ theme }) => theme.palette.default.main} !important;
+  }
+`;
 
 export const InputsContainer = styled(Grid)`
   padding-top: 32px;
@@ -20,35 +38,22 @@ export const ButtonContainer = styled.div`
   text-align: right;
 `;
 
-export const FormControlStyled = styled(FormControl)`
-  svg,
-  label,
-  .MuiSelect-select,
-  .css-2962tf-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
-  .css-1yyyg0v-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: ${({ theme }) => theme.palette.default.main};
-  }
-  fieldset {
-    /* This important is only for rewrite material ui lot of classes for hover and focus */
-    /* TO-DO: Remove important and find the better way to apply this style */
-    border-color: ${({ theme }) => theme.palette.default.main} !important;
-  }
-`;
+export const FormControlStyled = styled(FormControl)``;
 
 export const TextFieldStyled = styled(TextField)`
   &.css-ekfslj-MuiFormControl-root-MuiTextField-root {
     width: 100%;
     margin: 0;
   }
-  input,
-  .MuiInputLabel-formControl,
-  .css-1pnmrwp-MuiTypography-root,
-  .css-2962tf-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: ${({ theme }) => theme.palette.default.main};
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
-  fieldset {
-    /* This important is only for rewrite material ui lot of classes for hover and focus */
-    /* TO-DO: Remove important and find the better way to apply this style */
-    border-color: ${({ theme }) => theme.palette.default.main} !important;
+`;
+
+export const DateFieldStyled = styled(DateField)`
+  & {
+    width: 100%;
   }
 `;
