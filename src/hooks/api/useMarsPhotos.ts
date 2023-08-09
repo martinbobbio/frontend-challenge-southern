@@ -18,7 +18,7 @@ const useMarsPhotos = <Data = ResponseMarsPhotos>(
   const fetcher: FetcherFn<Data> = async () => {
     const response = await API.get(uri, {
       params: {
-        api_key: process.env.REACT_APP_API_KEY,
+        api_key: import.meta.env.VITE_API_KEY,
         sol: filters?.sol,
         camera: filters?.camera?.toLowerCase(),
         earth_date: filters?.date?.format('YYYY-MM-DD'),

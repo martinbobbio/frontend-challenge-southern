@@ -9,6 +9,11 @@ import {
 } from '@/assets';
 // Constants
 import { SupportedPages } from '@/constants';
+import {
+  faCircleExclamation,
+  faRocket,
+  faStarHalfStroke,
+} from '@fortawesome/free-solid-svg-icons';
 // Libreries
 import dayjs from 'dayjs';
 
@@ -26,13 +31,23 @@ const CARDS = [
     title: 'Curiosity',
     redirect: SupportedPages.Curiosity,
     image: curiosityDefault,
+    description:
+      'We delve into uncharted realms, quenching the thirst for discovery with each pixel captured by NASAs cosmic lens.',
   },
   {
     title: 'Opportunity',
     redirect: SupportedPages.Opportunity,
     image: opportunityDefault,
+    description:
+      'The orbital camera captures celestial moments, showcasing boundless opportunities in the expanse of space.',
   },
-  { title: 'Spirit', redirect: SupportedPages.Spirit, image: spiritDefault },
+  {
+    title: 'Spirit',
+    redirect: SupportedPages.Spirit,
+    image: spiritDefault,
+    description:
+      'NASAs images mirror the human spirit of courage and relentless quest for the unknown in the cosmos.',
+  },
 ];
 
 const BASIC_COLORS = {
@@ -53,6 +68,7 @@ const FONT_SIZES = {
   lg: '18px',
   xl: '24px',
   xxl: '30px',
+  xxxl: '64px',
 };
 
 const LINE_HEIGHTS = {
@@ -61,6 +77,7 @@ const LINE_HEIGHTS = {
   lg: '26px',
   xl: '32px',
   xxl: '38px',
+  xxxl: '70px',
 };
 
 const FONT_WEIGHTS = {
@@ -95,14 +112,35 @@ const SITES = {
     'https://github.com/martinbobbio/frontend-challenge-southern/tree/',
 };
 
+const EMPTY_STATES = {
+  favorites: {
+    icon: faStarHalfStroke,
+    title: 'You have no favorites',
+    description:
+      'To add a photo to favorites, click on the add to favorites button in the list',
+  },
+  rover: {
+    icon: faRocket,
+    title: 'No photos found',
+    description: 'Check the filters and try again',
+  },
+  error: {
+    icon: faCircleExclamation,
+    title: 'Error',
+    description: 'An error has occurred, please try again in a moment.',
+  },
+};
+
 export default {
   branding: BRANDING,
   cards: CARDS,
   sites: SITES,
+  emptyStates: EMPTY_STATES,
   forms: {
     cameras: OPTIONS_FILTER_CAMERAS,
     defaultFilters: {
-      date: dayjs('2023-08-01'),
+      date: dayjs(),
+      sol: 1000,
     },
   },
   theme: {

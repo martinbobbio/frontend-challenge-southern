@@ -5,15 +5,10 @@ import { CONFIG, SupportedPages } from '@/constants';
 // Components
 import { Icon } from '..';
 // Styled components
-import {
-  ButtonsContainer,
-  HeaderStyled,
-  Logo,
-  ThemeButton,
-} from './Header.styled';
+import { ButtonsContainer, HeaderStyled, Logo } from './Header.styled';
 // Libreries
-import { Toolbar, Container } from '@mui/material';
-import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { Toolbar, Container, IconButton } from '@mui/material';
+import { faLightbulb, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useDarkMode } from 'usehooks-ts';
 
 /**
@@ -33,9 +28,14 @@ const Header = () => {
             <Logo src={branding.header.logo} />
           </Link>
           <ButtonsContainer></ButtonsContainer>
-          <ThemeButton size='small' onClick={toggle}>
+          <IconButton className='favorites' size='small'>
+            <Link to={SupportedPages.Favorites}>
+              <Icon icon={faStar} />
+            </Link>
+          </IconButton>
+          <IconButton size='small' onClick={toggle}>
             <Icon icon={faLightbulb} />
-          </ThemeButton>
+          </IconButton>
         </Toolbar>
       </Container>
     </HeaderStyled>

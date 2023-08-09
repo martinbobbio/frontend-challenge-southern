@@ -1,7 +1,7 @@
 // React
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Components
-import { Home, Rover, NotFound } from '@/views';
+import { Home, Rover, NotFound, Favorites } from '@/views';
 import App from '@/App';
 // Constants
 import { SupportedPages, SupportedRovers } from '@/constants';
@@ -24,6 +24,10 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path={SupportedPages.Home} element={wrapApplication(<Home />)} />
+        <Route
+          path={SupportedPages.Favorites}
+          element={wrapApplication(<Favorites />)}
+        />
         <Route
           path={SupportedPages.Curiosity}
           element={wrapApplication(<Rover rover={SupportedRovers.Curiosity} />)}

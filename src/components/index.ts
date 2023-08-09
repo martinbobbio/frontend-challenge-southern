@@ -9,3 +9,4 @@ export { default as PhotoList } from './PhotoList/PhotoList';
 export { default as PhotoItem } from './PhotoItem/PhotoItem';
 export { default as FiltersDrawer } from './FiltersDrawer/FiltersDrawer';
 export { default as FilterChips } from './FilterChips/FilterChips';
+export { default as EmptyState } from './EmptyState/EmptyState';

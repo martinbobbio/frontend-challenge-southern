@@ -1,7 +1,7 @@
 // Components
-import { Icon, PhotoItem, ScrollInfinite } from '@/components';
+import { EmptyState, Icon, PhotoItem, ScrollInfinite } from '@/components';
 // Constants
-import { PhotosMars } from '@/constants';
+import { CONFIG, PhotosMars } from '@/constants';
 // Styled components
 import { PhotoListStyled, IconContainer } from './PhotoList.styled';
 // Libreries
@@ -11,7 +11,7 @@ import { ImageList, ImageListItem } from '@mui/material';
 interface PhotoListProps {
   photosMars?: PhotosMars[];
   isLoading: boolean;
-  onNextPage: () => void;
+  onNextPage?: () => void;
 }
 
 /**
@@ -22,6 +22,7 @@ interface PhotoListProps {
 const PhotoList = ({ photosMars, isLoading, onNextPage }: PhotoListProps) => {
   const shouldRender = {
     main: !!photosMars?.length,
+    emptyState: !photosMars?.length && !isLoading,
     loading: isLoading,
   };
 
@@ -32,7 +33,7 @@ const PhotoList = ({ photosMars, isLoading, onNextPage }: PhotoListProps) => {
           <ImageList variant='quilted' cols={3} gap={4} className='image-list'>
             {photosMars?.map((marsPhoto, i) => (
               <ImageListItem key={i}>
-                <PhotoItem src={marsPhoto.img_src} />
+                <PhotoItem photo={marsPhoto} />
               </ImageListItem>
             ))}
           </ImageList>
@@ -43,6 +44,7 @@ const PhotoList = ({ photosMars, isLoading, onNextPage }: PhotoListProps) => {
           <Icon size='xxl' animation='spin' icon={faCircleNotch} />
         </IconContainer>
       )}
+      {shouldRender.emptyState && <EmptyState {...CONFIG.emptyStates.rover} />}
     </PhotoListStyled>
   );
 };

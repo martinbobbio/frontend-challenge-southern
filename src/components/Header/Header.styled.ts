@@ -1,5 +1,4 @@
 // Libreries
-import { IconButton } from '@mui/material';
 import { styled } from 'styled-components';
 
 export const HeaderStyled = styled.div`
@@ -16,6 +15,9 @@ export const HeaderStyled = styled.div`
   button {
     color: ${({ theme }) => theme.palette.white.main};
   }
+  .favorites {
+    margin-right: 16px;
+  }
 `;
 
 export const Logo = styled.img`
@@ -28,8 +30,7 @@ export const ButtonsContainer = styled.div`
   margin: 0 auto;
 `;
 
-export const ThemeButton = styled(IconButton)`
-  img {
-    cursor: pointer;
-  }
+export const IconsContainer = styled.div`
+  margin-left: 16px;
+  display: inline;
 `;

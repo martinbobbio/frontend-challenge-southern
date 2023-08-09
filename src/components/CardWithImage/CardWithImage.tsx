@@ -13,6 +13,7 @@ interface CardWithImageProps {
   title: string;
   image: string;
   redirect: SupportedPages;
+  description: string;
 }
 
 /**
@@ -20,7 +21,12 @@ interface CardWithImageProps {
  *
  * @return React.ReactElement <Footer/>
  */
-const CardWithImage = ({ title, image, redirect }: CardWithImageProps) => {
+const CardWithImage = ({
+  title,
+  image,
+  redirect,
+  description,
+}: CardWithImageProps) => {
   return (
     <CardWithImageStyled>
       <Link to={redirect}>
@@ -38,8 +44,7 @@ const CardWithImage = ({ title, image, redirect }: CardWithImageProps) => {
                 {title}
               </Text>
               <Text fontWeight='low' size='md'>
-                Lizards are a widespread group of squamate reptiles, with over
-                6,000 species, ranging across all continents except Antarctica
+                {description}
               </Text>
             </CardContent>
           </CardActionArea>

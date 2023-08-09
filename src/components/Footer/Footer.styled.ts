@@ -1,3 +1,5 @@
+// Constants
+import { BREAKPOINTS } from '@/constants';
 // Libreries
 import { Link } from '@mui/material';
 import { styled } from 'styled-components';
@@ -18,6 +20,9 @@ export const FooterLogo = styled.img`
 
 export const ContentText = styled.div`
   text-align: left;
+  @media (max-width: ${BREAKPOINTS.small}) {
+    text-align: center;
+  }
 `;
 
 export const ExternalLink = styled(Link)`

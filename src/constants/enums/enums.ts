@@ -1,5 +1,6 @@
 export enum SupportedPages {
   Home = '/',
+  Favorites = '/favorites',
   Curiosity = '/curiosity',
   Opportunity = '/opportunity',
   Spirit = '/spirit',
@@ -17,6 +18,7 @@ export enum SupportedSizes {
   LG = 'lg',
   XL = 'xl',
   XXL = 'xxl',
+  XXXL = 'xxxl',
 }
 
 export enum SupportedRovers {

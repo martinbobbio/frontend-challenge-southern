@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // Components
 import {
   Breadcrumbs,
+  EmptyState,
   FilterChips,
   FiltersDrawer,
   Icon,
@@ -50,7 +51,7 @@ const Rover = ({ rover }: RoverProps) => {
   const [filters, setFilters] = useState<FiltersPhotos>(
     CONFIG.forms.defaultFilters
   );
-  const { data, isLoading } = useMarsPhotos(rover, page, filters);
+  const { data, isLoading, error } = useMarsPhotos(rover, page, filters);
 
   const breadcrumbs = {
     separator: <Icon size='sm' icon={faChevronRight} />,
@@ -97,10 +98,10 @@ const Rover = ({ rover }: RoverProps) => {
   return (
     <RoverStyled>
       <LayoutTwoColumns container spacing={2}>
-        <LeftColumn item xs={8}>
+        <LeftColumn item xs={7}>
           <Breadcrumbs {...breadcrumbs} />
         </LeftColumn>
-        <RightColumn item xs={4}>
+        <RightColumn item xs={5}>
           <Button
             size='small'
             variant='contained'
@@ -114,11 +115,14 @@ const Rover = ({ rover }: RoverProps) => {
       <FilterChipsContainer>
         <FilterChips filters={filters} onChangeFilters={_onSubmitFilters} />
       </FilterChipsContainer>
-      <PhotoList
-        photosMars={photosMars}
-        isLoading={isLoading}
-        onNextPage={_onNextPage}
-      />
+      {!error && (
+        <PhotoList
+          photosMars={photosMars}
+          isLoading={isLoading}
+          onNextPage={_onNextPage}
+        />
+      )}
+      {error && <EmptyState {...CONFIG.emptyStates.error} />}
       <FiltersDrawer
         rover={rover}
         open={showFilters}
