@@ -48,9 +48,25 @@ npm run dev
 
 ## Libreries used
 
-### Lorem
+### Axios
 
-- Lorem
+- For fetching information to the API
+
+### SWR
+
+- To better manage requests and have control over their status, in addition to caching information
+
+### DayJS
+
+- For a better way to use dates
+
+### MUI
+
+- To use nice components and fast development
+
+### Styled Components
+
+- For addings styles and reutilication of components
 
 ## Scripts
 
