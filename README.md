@@ -68,6 +68,10 @@ npm run dev
 
 - For addings styles and reutilication of components
 
+### Font Awesome
+
+- To render icons
+
 ## Scripts
 
 - `npm run dev`: Starts the development server using Vite.
