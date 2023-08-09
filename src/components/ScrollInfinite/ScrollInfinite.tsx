@@ -29,10 +29,24 @@ const ScrollInfinite = ({ children, onNextPage }: ScrollInfiniteProps) => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleInfiniteScroll);
+  /**
+   * Function that avoid multiple calls.
+   *
+   * @return void
+   */
+  const debounce = (func: () => void, delay: number) => {
+    let timer: NodeJS.Timeout;
     return () => {
-      window.removeEventListener('scroll', handleInfiniteScroll);
+      clearTimeout(timer);
+      timer = setTimeout(func, delay);
+    };
+  };
+
+  useEffect(() => {
+    const debouncedHandleScroll = debounce(handleInfiniteScroll, 300);
+    window.addEventListener('scroll', debouncedHandleScroll);
+    return () => {
+      window.removeEventListener('scroll', debouncedHandleScroll);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

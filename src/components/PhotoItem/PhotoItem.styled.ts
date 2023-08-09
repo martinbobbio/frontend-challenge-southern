@@ -1,3 +1,5 @@
+// Constants
+import { BREAKPOINTS } from '@/constants';
 // Libreries
 import { Box, Modal } from '@mui/material';
 import { styled } from 'styled-components';
@@ -9,10 +11,16 @@ export const PhotoItemStyled = styled.img`
     opacity: 0.7;
     cursor: pointer;
   }
+  @media (max-width: ${BREAKPOINTS.small}) {
+    width: 200px;
+  }
 `;
 
 export const PhotoModal = styled.img`
   height: 100%;
+  @media (max-width: ${BREAKPOINTS.small}) {
+    width: 200px;
+  }
 `;
 
 export const ModalStyled = styled(Modal)`

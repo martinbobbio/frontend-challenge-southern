@@ -30,15 +30,10 @@ export const FormControlStyled = styled(FormControl)``;
 export const FilterDrawerStyled = styled(Drawer)`
   input,
   svg,
-  label,
-  .MuiSelect-select,
-  .MuiInputLabel-formControl,
-  .css-2962tf-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
-  .css-1yyyg0v-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
-  .css-2962tf-MuiFormLabel-root-MuiInputLabel-root.Mui-error,
-  .css-1pnmrwp-MuiTypography-root,
-  .css-2962tf-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: ${({ theme }) => theme.palette.default.main};
+  p,
+  div,
+  label {
+    color: ${({ theme }) => theme.palette.default.main} !important;
   }
   fieldset {
     border-color: ${({ theme }) => theme.palette.default.main} !important;
@@ -46,10 +41,6 @@ export const FilterDrawerStyled = styled(Drawer)`
 `;
 
 export const TextFieldStyled = styled(TextField)`
-  &.css-ekfslj-MuiFormControl-root-MuiTextField-root {
-    width: 100%;
-    margin: 0;
-  }
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;

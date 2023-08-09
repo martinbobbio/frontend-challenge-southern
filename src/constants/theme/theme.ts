@@ -16,6 +16,7 @@ const FONT_SIZES = {
   lg: '18px',
   xl: '24px',
   xxl: '30px',
+  xxxl: '64px',
 };
 
 const LINE_HEIGHTS = {
@@ -24,6 +25,7 @@ const LINE_HEIGHTS = {
   lg: '26px',
   xl: '32px',
   xxl: '38px',
+  xxxl: '70px',
 };
 
 const FONT_WEIGHTS = {

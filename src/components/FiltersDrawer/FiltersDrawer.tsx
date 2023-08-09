@@ -124,7 +124,7 @@ const FilterDrawer = ({
       type='number'
       onChange={(e) => handleChangeSol(e.target.value)}
       defaultValue={sol}
-      sx={{ m: 1, width: '25ch' }}
+      sx={{ width: '100%' }}
       InputProps={{
         startAdornment: <InputAdornment position='start'>Sol</InputAdornment>,
       }}

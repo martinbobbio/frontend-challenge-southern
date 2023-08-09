@@ -1,22 +1,28 @@
 import addThreePoints from './addThreePoints';
+import { expect, test, describe } from 'vitest';
 
-describe('Util addThreePoints', () => {
-  it('Should handle correct value', async () => {
+describe('addThreePoints', () => {
+  test('Should handle correct value', () => {
     const result = addThreePoints('Lorem ipsum', 10);
     expect(result).toBe('Lorem ipsu...');
   });
 
-  it('Should handle correct value', async () => {
+  test('Should handle correct value', () => {
+    const result = addThreePoints('Lorem ipsum', 10);
+    expect(result).toBe('Lorem ipsu...');
+  });
+
+  test('Should handle correct value', () => {
     const result = addThreePoints(undefined, 10);
     expect(result).toBe('');
   });
 
-  it('Should handle short value', async () => {
+  test('Should handle short value', () => {
     const result = addThreePoints('Lo', 10);
     expect(result).toBe('Lo');
   });
 
-  it('Should handle long value', async () => {
+  test('Should handle long value', () => {
     const result = addThreePoints(
       'Lorem ipsum lorem lorem lorem lorem lorem',
       20

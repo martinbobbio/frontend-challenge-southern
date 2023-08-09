@@ -46,6 +46,7 @@ interface RoverProps {
  */
 const Rover = ({ rover }: RoverProps) => {
   const [page, setPage] = useState(1);
+  const [shouldPaginate, setShouldPaginate] = useState(false);
   const [photosMars, setPhotoMars] = useState<PhotosMars[]>([]);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<FiltersPhotos>(
@@ -69,8 +70,12 @@ const Rover = ({ rover }: RoverProps) => {
    * @return void
    */
   const _onNextPage = () => {
-    setPage(page + 1);
+    if (!isLoading && shouldPaginate) {
+      setShouldPaginate(false);
+      setPage((prev) => prev + 1);
+    }
   };
+  console.log(shouldPaginate);
 
   /**
    * Function that get handle getter for more photos.
@@ -92,6 +97,9 @@ const Rover = ({ rover }: RoverProps) => {
   useEffect(() => {
     if (data?.photos) {
       setPhotoMars((prevPhotos) => [...prevPhotos, ...data.photos]);
+      setShouldPaginate(true);
+    } else {
+      setShouldPaginate(false);
     }
   }, [data]);
 

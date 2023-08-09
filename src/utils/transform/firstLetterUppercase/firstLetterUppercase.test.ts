@@ -1,7 +1,8 @@
 import firstLetterUppercase from './firstLetterUppercase';
+import { expect, test, describe } from 'vitest';
 
-describe('Util firstLetterUppercase', () => {
-  it('Should handle correct value', async () => {
+describe('firstLetterUppercase', () => {
+  test('Should handle correct value', () => {
     const result = firstLetterUppercase('lorem ipsum');
     expect(result).toBe('Lorem ipsum');
   });
