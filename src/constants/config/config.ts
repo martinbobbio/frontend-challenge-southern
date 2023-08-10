@@ -1,12 +1,10 @@
 // Assets
-import {
-  curiosityDefault,
-  logoMBDark,
-  logoMBLight,
-  logoNASA,
-  opportunityDefault,
-  spiritDefault,
-} from '@/assets';
+import logoNASA from '@/assets/images/branding/NASA.svg';
+import logoMBDark from '@/assets/images/branding/logo-mb-dark.svg';
+import logoMBLight from '@/assets/images/branding/logo-mb-light.svg';
+import curiosityDefault from '@/assets/images/other/curiosity-default.jpg';
+import opportunityDefault from '@/assets/images/other/opportunity-default.jpg';
+import spiritDefault from '@/assets/images/other/spirit-default.jpg';
 // Constants
 import { SupportedPages } from '@/constants';
 import {
