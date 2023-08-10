@@ -1,4 +1,4 @@
-// // Branding
+// Branding
 // export { default as logoNASA } from './images/branding/NASA.svg';
 // export { default as logoMBLight } from './images/branding/logo-mb-light.svg';
 // export { default as logoMBDark } from './images/branding/logo-mb-dark.svg';

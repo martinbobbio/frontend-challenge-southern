@@ -1,8 +1,9 @@
 // Components
 import { Text } from '@/components';
 // Assets
-import logoMBDark from '@/assets/images/branding/logo-mb-dark.svg';
-import logoMBLight from '@/assets/images/branding/logo-mb-light.svg';
+// import { logoMBDark, logoMBLight } from '@/assets';
+import logoMBDark from '../../assets/images/branding/logo-mb-dark.svg';
+import logoMBLight from '../../assets/images/branding/logo-mb-light.svg';
 // Constants
 import { CONFIG } from '@/constants';
 import { version } from '../../../package.json';
