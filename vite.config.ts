@@ -10,7 +10,6 @@ export default defineConfig(() => {
 
   return {
     plugins: [react()],
-    base: '',
     resolve: {
       alias: [
         {
