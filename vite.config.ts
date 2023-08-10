@@ -19,7 +19,7 @@ export default defineConfig(() => {
       ],
     },
     define: {
-      'process.env': Object.keys(env).reduce((acc, key) => {
+      'process.env': Object.keys(env || {}).reduce((acc, key) => {
         acc[key] = JSON.stringify(env[key])?.replace(/"/g, '');
         return acc;
       }, {}),
